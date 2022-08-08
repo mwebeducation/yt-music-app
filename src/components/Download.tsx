@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import DownloadAds from "./DownloadAds";
 import Path318 from '../assets/Path 318.png'
+
 type Props = {};
 
 const Download: FC<Props> = () => {

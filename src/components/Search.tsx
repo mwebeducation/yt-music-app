@@ -1,4 +1,7 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
+import { motion } from "framer-motion";
+import VisibilitySensor from "react-visibility-sensor";
+
 import BackGraphics from '../assets/backgraphics.png';
 import d1 from '../assets/d1.png';
 import d2 from '../assets/d2.png';
@@ -11,15 +14,61 @@ import MusicPlayer from "./MusicPlayer";
 type Props = {};
 
 const Search:FC<Props> = () => {
+  const [elementIsVisible, setElementIsVisible] = useState(false);
+
+  const bg = {
+    true: {
+      left: "-44rem",
+    },
+    false: {
+      left: "-50rem",
+    },
+  };
+
+  const redimg = {
+    true: {
+      left: "18rem",
+    },
+    false: {
+      left: "16rem",
+    },
+  };
+  const musicimg = {
+    true: {
+      left: "2rem",
+    },
+    false: {
+      left: "6rem",
+    },
+  };
+
   return <div className="search relative h-[65rem] px-[5rem] bg-[#081730] pt-[18rem] pb-[10rem] z-[1] mt-[-15rem]
    flex items-center justify-between rounded-b-[5rem] w-[100%]">
     {/* left side */}
     <div className="left flex-1">
-      <img src={BackGraphics} alt="back graphics image" className={"absolute top-[22rem] left-[-47rem]"}/>
+      <motion.img
+        variants={bg}
+        animate={`${elementIsVisible}`}
+        transition={{
+          duration: 1,
+          type: "ease-out",
+        }} src={BackGraphics} alt="back graphics image" className={"absolute top-[22rem] left-[-47rem]"}/>
       <img src={d1} alt="d1 image" className={"absolute w-[16rem] top-[26rem]"}/>
       <img src={d2} alt="d2 image" className={"absolute w-[9rem] top-[32.7rem] left-[7rem]"}/>
-      <img src={d3} alt="d3 image" className={"absolute top-[32rem] left-[17rem] w-[9rem]"}/>
-      <img src={d4} alt="d4 image" className={"absolute top-[50rem] left-[2rem] w-[17rem]"}/>
+      <motion.img
+        variants={redimg}
+        animate={`${elementIsVisible}`}
+        transition={{
+          duration: 1.2,
+          type: "ease-out",
+        }} src={d3} alt="d3 image" className={"absolute top-[32rem] left-[17rem] w-[9rem]"}/>
+      <motion.img
+        variants={musicimg}
+        animate={`${elementIsVisible}`}
+        transition={{
+          duration: 1,
+          type: "ease-out",
+        }} src={d4} alt="d4 image" className={"absolute top-[50rem] left-[2rem] w-[17rem]"}/>
     </div>
     {/* right side */}
     <div className="right flex items-start flex-col justify-center flex-1 overflow-hidden z-[2] h-[100%] pt-[8rem]">
@@ -46,7 +95,12 @@ const Search:FC<Props> = () => {
         </span>
       </div>
       {/*music player*/}
-      <MusicPlayer />
+
+      <VisibilitySensor
+        onChange={(isVisible: boolean) => setElementIsVisible(isVisible)}
+      >
+        <MusicPlayer />
+      </VisibilitySensor>
     </div>
   </div>;
 }

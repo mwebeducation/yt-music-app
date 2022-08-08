@@ -1,8 +1,11 @@
 import {FC} from 'react';
 import CenterMenu from "./CenterMenu";
 import Facebook from '@mui/icons-material/Facebook';
+// @ts-ignore
 import Twitter from '@mui/icons-material/Twitter';
+// @ts-ignore
 import YouTube from '@mui/icons-material/YouTube';
+// @ts-ignore
 import LinkedIn from '@mui/icons-material/LinkedIn';
 
 type Props = {};
